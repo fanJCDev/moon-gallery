@@ -1,32 +1,30 @@
-import Image from "next/image";
 import Link from "next/link";
-import type { Artwork } from "@/types/artwork";
+
+interface Artwork {
+  slug: string;
+  title: string;
+  category: string;
+  image?: string;
+}
 
 export default function ArtworkCard({ artwork }: { artwork: Artwork }) {
+  const currentImage = artwork.image || `/artwork/${artwork.slug}.jpg`;
+
   return (
-    <Link href={`/artwork/${artwork.slug}`} className="group block">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-neutral-900">
-        <Image
-          src={artwork.image}
+    <Link href={`/artwork/${artwork.slug}`} className="group block w-full">
+      {/* کادر عکس با نسبت ۳ به ۲ متناسب و جمع‌وجور */}
+      <div className="relative aspect-[3/2] w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 transition-all duration-300 group-hover:border-amber-200/50 shadow-lg">
+        <img
+          src={currentImage}
           alt={artwork.title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {artwork.sold && (
-          <span className="absolute right-3 top-3 rounded-full bg-neutral-950/80 px-3 py-1 text-xs tracking-widest text-amber-200">
-            SOLD
-          </span>
-        )}
       </div>
-      <div className="mt-3">
-        <h3 className="font-display text-lg">{artwork.title}</h3>
-        <p className="text-sm text-neutral-400">
-          {artwork.technique} · {artwork.width}×{artwork.height} cm
-        </p>
-        <p className="mt-1 text-sm text-amber-200">
-          {artwork.sold ? "Private collection" : `$${artwork.price.toLocaleString("en-CA")} CAD`}
-        </p>
+      <div className="mt-3 flex justify-between items-center px-1">
+        <h3 className="text-base font-medium text-neutral-200 group-hover:text-amber-200 transition">
+          {artwork.title}
+        </h3>
+        <span className="text-xs uppercase text-neutral-500">{artwork.category}</span>
       </div>
     </Link>
   );

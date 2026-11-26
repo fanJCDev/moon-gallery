@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/*@import "tailwindcss";
 
 body {
   font-family: var(--font-inter), system-ui, sans-serif;
@@ -11,4 +11,15 @@ body {
 }
 
 ::selection { background: #fcd34d; color: #0a0a0b; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }*/
+@import "tailwindcss";
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #0a0a0b;
+  color: #fafafa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
